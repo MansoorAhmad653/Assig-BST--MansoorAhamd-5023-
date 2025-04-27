@@ -26,6 +26,8 @@ public:
     Course_info_BST() {
         root = NULL;
     }
+    // Add courses
+
     void Add_course() {
         node* newnode = new node;
 
@@ -61,9 +63,49 @@ public:
                     }
                     temp = temp->right;
                 }
+                else {
+                    cout << "Invalid Entery.";
+                    return;
+                }
             }
         }
     }
+    // Add course end
+    
+    bool Search_course(int search_id) {
+              
+
+        if (root == NULL) {
+            return false;
+        }
+        else {
+            node* temp = root;
+
+            while (true) {
+                if (search_id <= temp->c_id) {
+                  
+                     return true;
+                    
+                }
+                else {
+
+                    temp = temp->left;
+                }
+                if (search_id > temp->c_id) {
+                  
+                    temp = temp->right;
+                }
+                else{
+                    return false;
+                }
+            }
+        }
+    }
+    //Search course
+    
+
+    // Search course end
+  
 
     // traversal fun
 
@@ -77,7 +119,7 @@ int main()
     Course_info_BST bst;
 
    
-
+    cout << "Enter Course id You want to Search: ";
 
 
     return 0;
