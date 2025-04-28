@@ -72,6 +72,7 @@ public:
     }
     // Add course end
     
+    //Search course
     bool Search_course(int search_id) {
               
 
@@ -81,27 +82,28 @@ public:
         else {
             node* temp = root;
 
-            while (true) {
-                if (search_id <= temp->c_id) {
+            while (temp != NULL) {
+                if (search_id < temp->c_id) {
                   
-                     return true;
+                     temp = temp->left;
                     
                 }
-                else {
+                else if(search_id == temp->c_id){
 
-                    temp = temp->left;
+                     return true;
+
                 }
-                if (search_id > temp->c_id) {
+                else if (search_id > temp->c_id) {
                   
                     temp = temp->right;
                 }
                 else{
+
                     return false;
                 }
             }
         }
     }
-    //Search course
     
 
     // Search course end
@@ -116,10 +118,46 @@ public:
 };
 int main()
 {
+    int search_id;
+    unsigned int choice;
     Course_info_BST bst;
 
-   
-    cout << "Enter Course id You want to Search: ";
+    do {
+        cout << "--------------Menu-------------\n";
+        cout << "1. Enter Course data\n";
+        cout << "2. Search Course data\n";
+        cout << "3. Display\n";
+        cout << "4. Count \n";
+        cout << "5. Exit\n";
+        cout << "Enter your choice: ";
+        cin >> choice;
+        cout << endl;
+
+        switch (choice) {
+        case 1:
+            bst.Add_course();
+            break;
+
+        case 2:
+            cout << "Enter Course id You want to Search: ";
+            cin >> search_id;
+
+            bst.Search_course(search_id);
+            break;
+
+        case 3:
+           
+            break;
+
+        case 4:
+           
+            break;
+      
+        default:
+            cout << "Invalid choice! Please try again.\n";
+            break;
+        }
+    } while (true);
 
 
     return 0;
