@@ -1,5 +1,3 @@
-
-
 #include <iostream>
 #include <string>
 
@@ -106,6 +104,7 @@ public:
             }
         }
     }
+    // Search course end        
     
     //Giving Root
     node* giveroot() {
@@ -113,7 +112,15 @@ public:
     }
     //Giving Root end
     
-    // Search course end        
+    // Delete Course
+    void deleteCourse( int delcour) {
+        node* temp = root;
+        if (delcour == temp->c_id) {
+            temp = temp -> left;
+            delete temp;
+        }
+    }
+    // Delete Course end
     
     // traversal function
     void preorder(struct node *root) {
@@ -121,7 +128,6 @@ public:
         if (temp == NULL) {
             return;
         }
-
         preorder(temp->left);
         cout <<"\t Course id: "<< temp->c_id << "\tCourse Name: "<< temp->c_name << "\t Credit Hours: " << temp->cre_hrs << endl;
         preorder(temp->right);
@@ -130,7 +136,6 @@ public:
 };
 int main()
 {
-    int search_id;
     unsigned int choice, course_count = 0;
     Course_info_BST bst;
 
@@ -140,7 +145,8 @@ int main()
         cout << "2. Search Course.\n";
         cout << "3. Display.\n";
         cout << "4. Count Courses.\n";
-        cout << "5. Exit.\n";
+        cout << "5. Delete Course.\n";
+        cout << "6. Exit.\n";
         cout << "Enter your choice: ";
         cin >> choice;
         cout << endl;
@@ -165,6 +171,8 @@ int main()
             break;
 
         case 2:
+            int search_id;
+
             cout << "Enter Course id You want to Search: ";
             cin >> search_id;
 
@@ -188,7 +196,15 @@ int main()
             cout << "Number of Course are " << course_count << endl;
             
             break;
-      
+        case 5:
+            int delete_id;
+
+            cout << "Enter Course id You want to delete: ";
+            cin >> delete_id;
+            bst.deleteCourse(delete_id);
+            break;
+        case 6:
+            exit(-1);
         default:
             cout << "Invalid choice! Please try again.\n";
             break;
