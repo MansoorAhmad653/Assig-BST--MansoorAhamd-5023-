@@ -29,46 +29,48 @@ public:
     // Add courses
 
     void Add_course() {
-        node* newnode = new node;
+     
+            node* newnode = new node;
 
-        cout << "Enter Course id: ";
-        cin >> newnode->c_id;
+            cout << "Enter Course id: ";
+            cin >> newnode->c_id;
 
-        cin.ignore();
-        cout << "Enter Course Name: ";
-        getline(cin, newnode->c_name);
+            cin.ignore();
+            cout << "Enter Course Name: ";
+            getline(cin, newnode->c_name);
 
-        cout << "Enter Credit Hours: ";
-        cin >> newnode->cre_hrs;
+            cout << "Enter Credit Hours: ";
+            cin >> newnode->cre_hrs;
 
 
-        if (root == NULL) {
-            root = newnode;
-        }
-        else {
-            node* temp = root;
+            if (root == NULL) {
+                root = newnode;
+            }
+            else {
+                node* temp = root;
 
-            while (true) {
-                if (newnode->c_id < temp->c_id) {
-                    if (temp->left == NULL) {
-                        temp->left = newnode;
-                        break;
+                while (true) {
+                    if (newnode->c_id < temp->c_id) {
+                        if (temp->left == NULL) {
+                            temp->left = newnode;
+                            break;
+                        }
+                        temp = temp->left;
                     }
-                    temp = temp->left;
-                }
-                else if (newnode->c_id > temp->c_id) {
-                    if (temp->right == NULL) {
-                        temp->right = newnode;
-                        break;
+                    else if (newnode->c_id > temp->c_id) {
+                        if (temp->right == NULL) {
+                            temp->right = newnode;
+                            break;
+                        }
+                        temp = temp->right;
                     }
-                    temp = temp->right;
-                }
-                else {
-                    cout << "Invalid Entery.";
-                    return;
+                    else {
+                        cout << "Invalid Entery.";
+                        return;
+                    }
                 }
             }
-        }
+                   
     }
     // Add course end
     
@@ -105,52 +107,86 @@ public:
         }
     }
     
-
-    // Search course end
-  
-
-    // traversal fun
-
-    void preorder() {
-        node* temp = root;
-
+    //Giving Root
+    node* giveroot() {
+        return root;
     }
+    //Giving Root end
+    
+    // Search course end        
+    
+    // traversal function
+    void preorder(struct node *root) {
+        node *temp = root;
+        if (temp == NULL) {
+            return;
+        }
+
+        preorder(temp->left);
+        cout <<"\t Course id: "<< temp->c_id << "\tCourse Name: "<< temp->c_name << "\t Credit Hours: " << temp->cre_hrs << endl;
+        preorder(temp->right);
+    }
+    // traversal function end
 };
 int main()
 {
     int search_id;
-    unsigned int choice;
+    unsigned int choice, course_count = 0;
     Course_info_BST bst;
 
     do {
         cout << "--------------Menu-------------\n";
-        cout << "1. Enter Course data\n";
-        cout << "2. Search Course data\n";
-        cout << "3. Display\n";
-        cout << "4. Count \n";
-        cout << "5. Exit\n";
+        cout << "1. Add Course data.\n";
+        cout << "2. Search Course.\n";
+        cout << "3. Display.\n";
+        cout << "4. Count Courses.\n";
+        cout << "5. Exit.\n";
         cout << "Enter your choice: ";
         cin >> choice;
         cout << endl;
 
         switch (choice) {
         case 1:
-            bst.Add_course();
+            do {
+
+                bst.Add_course();
+                course_count++;
+
+                char choic;
+                cout << "\nDo you want to Enter Another Course(Y/N)?";
+                cin >> choic;
+                cout << endl;
+                if (!(choic == 'y' || choic == 'Y')){
+
+                    break;
+                }
+              
+            } while (true);
             break;
 
         case 2:
             cout << "Enter Course id You want to Search: ";
             cin >> search_id;
 
-            bst.Search_course(search_id);
-            break;
+            if(bst.Search_course(search_id)){
+
+                cout<<"\n ******************** Course is found with Course id: "<< search_id<<" ******************** " << endl;
+
+                break;
+            }
+            else {
+                cout<<"\n******************** Course is not found. ******************** "<<endl;
+                break;
+            }
 
         case 3:
-           
+            bst.preorder(bst.giveroot());
+
             break;
 
         case 4:
-           
+            cout << "Number of Course are " << course_count << endl;
+            
             break;
       
         default:
