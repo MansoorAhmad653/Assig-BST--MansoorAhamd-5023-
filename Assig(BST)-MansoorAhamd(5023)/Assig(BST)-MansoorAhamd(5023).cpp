@@ -114,10 +114,22 @@ public:
     
     // Delete Course
     void deleteCourse( int delcour) {
-        node* temp = root;
-        if (delcour == temp->c_id) {
-            temp = temp -> left;
-            delete temp;
+        if (root == NULL) {
+            cout << "There is no course it to be deleted." << endl;
+            return;
+        }
+        else {
+
+            node* temp = root;
+            node* parent = NULL;
+            //while (temp != NULL || temp->c_id == delcour) {
+
+                if (delcour == temp->c_id) {
+                    parent = temp;
+                    cout << "The course is deleted." << endl;
+                    delete temp;
+                }
+            
         }
     }
     // Delete Course end
