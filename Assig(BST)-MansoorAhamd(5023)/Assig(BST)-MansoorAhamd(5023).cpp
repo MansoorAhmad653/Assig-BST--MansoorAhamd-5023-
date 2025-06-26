@@ -135,7 +135,7 @@ public:
     // Delete Course end
     
     // traversal function
-    void preorder(struct node *root) {
+    void inorder(struct node *root) {
         node *temp = root;
         if (temp == NULL) {
             return;
